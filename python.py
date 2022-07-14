@@ -409,3 +409,305 @@ print(multiples)
 languages = ["python", "perl", "Ruby", "go", "java", "c"]
 length = [len(language) for language in languages]
 print(length)
+
+
+#another data type dictionaries take the form of pairs of keys and values
+#to get a dictionaries value we use a corresponding value keys
+#in python dictornay word willl be the key and the meaning will be the value
+#dictionaries use curly brackets in their content
+
+x = {}
+print(type(x))
+
+#ex of dictionaries 
+
+file_counts = {"jpg": 10, "txt":14, "csv":2, "py":23}
+print(file_counts["txt"])
+
+print("jpg" in file_counts)
+
+#dictionaries are mutable we can add remove or replace
+#replaceing
+
+file_counts["cfg"] = 8
+print(file_counts)
+
+#the inside the dictinaries are unique if we try to store 2 different keys we just replace one with the other
+#we can delete in dictinories with the del key word both the dictonary and the key to the element
+del file_counts["cfg"]
+print(file_counts)
+
+#if we use a dictionary in a for loop the iteration variable will go through the keys in the dictionary if you want to access the associated values you can either use the keys as 
+
+file_counts = {"jpg": 10, "txt":14, "csv":2, "py":23}
+for extension in file_counts:
+    print(extension)
+
+
+#indexes of the dictionary or you can use the items method which returns a tuple foreach element in the dictionary
+#the tuple fisrt element is the key and second element is the values
+
+for ext, amount in file_counts.items():
+    print("there are {} files with the .{} extension".format(amount, ext))
+
+#sometimes you might just be intreseted in the keys of a dictionary other times we might olny wants the values 
+#we can access both with their corrresponding dictionary methods
+
+print(file_counts.keys())
+
+print(file_counts.values())
+
+for value in file_counts.values():
+    print(value)
+
+#in this code we are initialising an empty code dictionary then going through each letter in the given string
+#for each letter we check if its not already in the dictionary and in that case we initilize an entry in the dicitonary with a value of zero
+#finally we increment the count for that letter in the dictionary
+#to sum up we created a dictionary where the keys are each of the letters present in the strings and the values are how many times each letter is present
+ 
+def count_letters(text):
+    result = {}
+    for letter in text:
+        if letter not in result:
+            result[letter] = 0
+        result[letter] += 1
+    return result
+
+print(count_letters("aaaaa"))
+
+
+#NOTE you want to use dictionaries when you plan on searching for a specific element
+#difference between list and dictionaries
+#type of values stored in lists and dictionaries in list you can store any data type in dictionaries we can store any data type for the values but the keys are restricted to specific types
+#we can use numbers booleans strings tuples as dictionary keys
+#data type SET which is bit like a cross between a list anda dictionary
+#a set is used when you want to store a bunch of elements and be certain that they only present once
+
+
+#OPP Object oriented programming
+#a way of thinking about and implementing our code
+#a flexible powerful paradogm where classes repesent and define concepts while objects are instances of classes
+#all numbers list strings dictionaries we seen so far is object and each of them are instances of class repesenting a concepts
+#the opp comes down to attributes and methods associated with a type
+#the attributes are the characteristics associated to a type
+#the methods are the functions associated to a type
+#each instance we used in python is upto different in up class they all had the same method but the contents were different 
+
+#the dir functions gets the interpreter to print to the screen a list of all the attributes and methods
+#the first bunch here is the special method that begin and end with double underscores these methods arent usually called by those wired names
+#the last bunch is the string method which we had come accross
+#print(dir(""))
+
+#when we use the help function on any variable or value
+
+#print(help(""))
+
+#the power of object oriented programming is that we can define our own classes with their own attributes and methods
+
+
+#we are defing our own class in python we use class reserved keyword to tell the computer that we are starting a new class we follow this with a name of a class and a colon
+#the python style guideline recommend that class names should start with a capital letter so we will be using that convention
+#after the line of class comes the body of the class defination which is indented to the right in this case we havent added anything to the body yet so we use the pass keyword to show that the body is empty
+#we can also use the same placeholder in any empty python block
+
+class Apple:
+    pass
+
+#defining attributes to python of a apple
+class Apple:
+    color = ""
+    flavor = ""
+#here we are creating new instances of a apple class and assigning it to our apple class and assigning to a variable called jonagold
+#to creaate a new instance of any class we call the name of the class as if it were a function 
+#next set the values of the attributes
+
+jonagold = Apple()
+jonagold.color = "red"
+jonagold.flavor = "sweet"
+print(jonagold.color)
+
+#the syntax used to access the attributes is called dot notation because of the dot used in the expression
+#dot notation lets you access any of the abilities the object might have (called methods) or information it might store (called attributes) like flavor
+#the attributes and methods of some objects can be other objects and can be attributes and methods of their own 
+#for example we can use the upper method to turn the string of the color attributes to uppercase 
+print(jonagold.color.upper())
+
+#methods functions that operate on the attributes of a specific instance of a class
+class piglet:
+    def speak(self):  #thats how we define a function as a method of the class this function is reciveing a parameter called self this parameter represents the instance that the method is being executed on 
+        print("oink oink")
+
+hamlet = piglet()
+hamlet.speak()
+
+#example 2
+class piglet:
+    name = "piglet"  #this time an attribute called name with a default value of piglet we can change that value later but its a good idea to nake sure our variable is inisilize
+    def speak(self):
+        print("oink! im {}! oink!".format(self.name))  #we are using self name function to know what name to print this means that its accessing the attribute name from the current instance of piglet
+
+hamlet = piglet()
+hamlet.name = "hamlet"
+hamlet.speak()
+
+#now we have created 2 instance both of them print their speak name and not the other 
+#variables that have different values for different instances of the same class are called instance variables just like name
+petunia = piglet()
+petunia.name = "petunia"
+petunia.speak()
+
+#the constructer of a class is the method thats called when you call the name of the class its always named init 
+#the method that starts and ends with two underscores are special methods
+#here we have defined a constructor one very important special method this method on top of the self variable that repsents the instance recieves two more parameters colo and flavor
+#those values as the values of the current instance
+class Apple:
+    def __init__(self, color, flavor):
+        self.color = color
+        self.flavor = flavor
+
+jonagold = Apple("red", "sweet")
+print(jonagold.color)
+
+#using the str method we are telling python that we want it to display when the print function is called an instance of our class
+
+class Apple:
+    def __init__(self, color, flavor):
+        self.color = color
+        self.flavor = flavor
+    def __str__(self):
+        return "this apple is {} and its flavor is {}".format(self.color, self.flavor)
+
+jonagold = Apple("red", "sweet")
+print(jonagold)
+
+#docstring a brief text that explains what something does remember that the docstring alwaays has to be idented at the same level of the block its documenting
+def to_seconds(hours, minutes, seconds):
+    """Returns the amount"""
+    return hours*3600+minutes*11+seconds
+
+help(to_seconds)
+
+
+#inheritance the principle of inheritance lets a programmer build relatioship between concepts and group them together 
+#in particular this allows us to reduce code duplication by generalizing our code 
+#in python we use parentheses in the class declaration to show an inheritance relationship 
+#for our new fruit classes we used that syntax to tell our computer that both the apple and the grape classes inherit from the class because of this they automatically have the same
+#constructor which sets the color and flavor attributes
+#you can think of the fruit class as the parent class and the apple and grape classes as siblings
+
+class Fruit:
+    def __init__(self, color, flavor):
+        self.color = color
+        self.flavor = flavor
+
+class Apple(Fruit):
+    pass
+
+class Grape(Fruit):
+    pass
+
+#first we crate an instance of the apple class
+#now an instance of the grape class 
+
+grapply_smith = Apple("green", "tart")
+carnelain = Grape("purple", "sweet")
+print(grapply_smith.color)
+
+#with the inheritance techniques we can use the fruit class to store information that applies to all kind of fruit and keep apple or grape specific attributes in their own classes
+#inheritance lets you reuse code written for one class in other classes
+
+#always initialize mutable attributes in the constuctor
+#to add package to the dictionary we will use add_package method
+
+class Respository:
+    def __init__(self):  #its a method inside the repository class 
+        self.packages = {}
+    def add_package(self, package):  #thats making use of the values method in the dictionary class 
+        self.packages[package.name] = package
+    def total_size(self):   #and it accessing the size attribute in the package class that is a power of composition 
+        result = 0
+        for package in self.package.value():
+            result += package.size
+        return result
+
+#when we have other objects as attributes we can use all their attributes and methods to get our own code to do what we want 
+#remember the keys are the package names and the values are the package objects for our calcuation we only care about the objects so we will retrieve them with the values dictionary method 
+#now for each package we want to add the size to the result variable 
+
+#python provides abstraction called modules
+#modules used to organize functions classes and other data together in a structured way 
+#all these modules are contained in a group called the python import library
+#first we will use import module for generating random functions & numbers 
+
+import random
+print(random.randint(1, 10))
+
+#this function recieves two parameters and generates a random number between the two parameters that we pass in this case we are generating a random number between 1 and 10 
+#the syntax used for calling a function provided by a module is similar to calling a method provided by a class 
+#it uses a dot to seprate a module and the function provided by that module 
+
+#next example
+#a datetime module provides a datetime class and the atetime class gives us a method called now 
+#this now method generates an instance of the datetime clas for the current time 
+#we can operate on this instance of datetime in a bunch of ways 
+#the print function is calling the str method of the datetime class which formats it in the way that we see here 
+#we can also access the instance through its attributes and methods 
+
+import datetime
+now = datetime.datetime.now()
+print(type(now))
+print(now)
+ 
+#the datetime module provides more classes than the datetime class for example we can use the timedelta class to calculate a date in the future or in the past
+print(now + datetime.timedelta(days=222))
+
+#in this case we are creating an instance of the time delta class with a value of 28 days then we are adding it to the instance of the datetime class that we already had and printing out the result
+###real world concepts are represented by classes###
+###instances of classes are usually called objects###
+###objects have attributes which are used to store information about them
+###we can make objects do work by calling their methods
+
+#sort and sorted in python
+#the difference between these two options is that the sort method modifies the list its executed on while the sorted function returns a new list thats been sorted. apart from the they work the same.
+numbers = [1 ,2, 5, 4, 5,]
+numbers.sort()
+print(numbers)
+
+#putting all together 
+#their is a secirnio in our real world problems like you want to see how many systems are loged in and how many are loged out we want to see and solve this problem and list all the system that are
+#are login and logout and are blank after that we will generate a report of these systems 
+# we know that we need to process the events to generate our reports we know how to sort the list of events chronologically we know that we will store the data in a dictionary of sets
+# which we will use to keep track of whos logged in where and that we will have a function that generates the dictionary and a separate one that prints the dicitionary 
+# first definig a helper function that will sort the list 
+# next start coding our processing function which we will call current user the first step to define a function 
+
+def get_event_date(event):
+    return event.date  #we will use this simple function as the parameter to the sort function to sort the list 
+
+def current_users(events):   #inside the function we will first sort our events by using the sort method and passing the function we just created as the key 
+    events.sort(key= get_event_date)
+    machines = {}       #now before we start iterating through our list of results we need to create the dictionary where we will store the names and users of a machine  
+    for event in events:  #we need to check if the machine affected by this event is in the dictionary if tis not we will add it with an empty set as the value 
+        if event.machine not in machines:
+            machines[event.machine] = set()   #now for the login events we want to add the user to the list and for the logout events we want ot remove user from the list for this we will use the add and remove methods 
+        if event.type == "login":
+            machines[event.machine].add(event.user)
+        elif event.type == "logout":
+           machines[event.machine].remove(event.user)
+    return machines
+
+#for generating
+#in our report we want to iterate over the keys and values in the dictionary to do that we will use the method called items that returns both the keys and the values for each pair in the dictionary
+def generate_report(machine):
+    for machine, users in machine.items():   #now before we print anything we want to ensure that we dont print any machines where nobody is currently logged in this could happned if the user logged in and logged out 
+      if len(users) > 0:      #to avoid that we tell the computer only to print when the sets of users has more than zero elements 
+        user_list = ", ".join(users)   #we want to print the machine name, followed by the users loged in to the machine separated by commas lets generate the string of logged in users for the machine using the method join      
+        print("{}: {}".format(machine, user_list))
+
+#using opp for classing our own function
+class Event:
+    def __init__(self, event_date, event_type, machine_name, user ):
+        self.date = event_date
+        self.type = event_type
+        self.machine = machine_name
+        self.user = user
